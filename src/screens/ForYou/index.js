@@ -30,22 +30,22 @@ const initialBanners =  [
                id : 1,
                title: 'The Secret of Angel',
                image: 'https://akcdn.detik.net.id/community/media/visual/2019/04/03/dac43146-7dd4-49f4-89ca-d81f57b070fc.jpeg?w=770&q=90',
-               desc : 'The secref of angel is fun ..',
+               desc : 'Lorem ipsum dolor sit atmet adipisicing elit constructor heki done.',
                genre : 'Romantis',
                popularity : '416.255'
          }, {
                id : 2,
-               title: 'Pasutri Gaje',
+               title: 'Story Love',
                image: 'https://akcdn.detik.net.id/community/media/visual/2019/04/03/dac43146-7dd4-49f4-89ca-d81f57b070fc.jpeg?w=770&q=90',
-               desc : 'Pasutri ini memang gaje ..',
-               genre : 'Komedi',
+               desc : 'Lorem ipsum dolor sit atmet adipisicing elit constructor heki done.',
+               genre : 'Scifi',
                popularity : '417.366'
          }, {
                id  : 3,
                title: 'Young Mom',
                image: 'https://akcdn.detik.net.id/community/media/visual/2019/04/03/dac43146-7dd4-49f4-89ca-d81f57b070fc.jpeg?w=770&q=90',
-               desc : 'Wahh mahmud nih ..',
-               genre : 'Lucu',
+               desc : 'Lorem ipsum dolor sit atmet adipisicing elit constructor heki done.',
+               genre : 'Comedy',
                popularity : '486.255'
          }
 ];
@@ -60,7 +60,7 @@ function ForYou() {
                    <Search />
                     <View style={{flex:1,paddingHorizontal:18}}>
                         <Text style={{fontSize:24,fontWeight:'700',marginTop:10}}>Halo!</Text>
-                        <Text style={{fontSize:18,color :'#666',marginTop:4}}>Lagi Galau ? ini obat yang pas buatmu!</Text>
+                        <Text style={{fontSize:18,color :'#666',marginTop:4}}>Lorem ? ipsum dolor sit atmet adi!</Text>
                     </View>
                 </View>
                 <View style={{flex:9,alignItems:'center'}}>
