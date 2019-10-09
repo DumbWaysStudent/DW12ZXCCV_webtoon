@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { 
+import {
     View,
     StyleSheet
 } from 'react-native';
@@ -13,13 +13,13 @@ import {
 } from 'native-base';
 
 import {validateEmail} from '../../helpers'
-export default function Login() {
-    
+export default function Login({navigation}) {
+
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [visible,setVisible] = useState(false);
     const [active,setActive] = useState(true);
-    
+
     const checkIsError = () => {
         if(validateEmail(email) === true && password.length >= 5) {
             setActive(false);
@@ -51,9 +51,9 @@ export default function Login() {
                     <View>
                         <Text style={{marginBottom : 14}}>Email</Text>
                         <Item regular>
-                            <Input 
+                            <Input
                                 value={email}
-                                onChangeText={text => setEmail(text)} 
+                                onChangeText={text => setEmail(text)}
                             />
                         </Item>
                     </View>
@@ -63,17 +63,22 @@ export default function Login() {
                             <Input
                                 secureTextEntry={visiblePassword}
                                 value={password}
-                                onChangeText={text => setPassword(text)} 
+                                onChangeText={text => setPassword(text)}
                              />
                             <Icon name="eye" style={{color:color}} onPress={() => setVisible(!visible)} />
                         </Item>
                     </View>
                     <View style={{marginTop: 30}}>
-                        <Button full success disabled={active}>
+                        <Button
+                            full
+                            success
+                            disabled={active}
+                            onPress={() => navigation.navigate('ForYou')}
+                        >
                             <Text>LOGIN</Text>
                         </Button>
                     </View>
-                </View> 
+                </View>
            </View>
         </Container>
     )

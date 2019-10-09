@@ -1,9 +1,10 @@
-import React from 'react'
-import Login from './src/screens/Login';
+import React from 'react';
+import Routes from './src/config/routes';
 
-
-export default function App() {
-  return (
-    <Login />
-  )
+function App () {
+   return (
+      <Routes />
+   )
 }
+
+export default App;
