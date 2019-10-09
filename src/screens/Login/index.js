@@ -12,7 +12,9 @@ import {
     Icon
 } from 'native-base';
 
-import {validateEmail} from '../../helpers'
+import { validateEmail } from '../../config/helpers'
+
+
 export default function Login({navigation}) {
 
     const [email,setEmail] = useState('');

@@ -1,6 +1,3 @@
-
-
-
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import{
@@ -9,11 +6,16 @@ import{
 } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import  { createBottomTabNavigator } from 'react-navigation-tabs';
+import {
+   TouchableOpacity,
+   Share
+} from 'react-native';
 //screens
 import Login from '../../screens/Login';
 import ForYou from '../../screens/ForYou';
 import Favorite from '../../screens/Favorite';
 import Profile from '../../screens/Profile';
+import Detail from '../../screens/Detail';
 
 const PublicNavigation = createStackNavigator({
    Login: {
@@ -25,7 +27,7 @@ const PublicNavigation = createStackNavigator({
 });
 
 
-const PrivateNavigation = createBottomTabNavigator(
+const BottomNavigation = createBottomTabNavigator(
    {
       ForYou: {
          screen: ForYou,
@@ -37,7 +39,7 @@ const PrivateNavigation = createBottomTabNavigator(
             ),
          },
       },
-      Favourite: {
+      Favorite: {
          screen: Favorite,
          navigationOptions: {
             header: null,
@@ -72,6 +74,51 @@ const PrivateNavigation = createBottomTabNavigator(
       },
    },
 );
+
+const PrivateNavigation = createStackNavigator({
+   BottomNavigation : {
+      screen : BottomNavigation,
+      navigationOptions : {
+         header : null
+      }
+   },
+   Detail : {
+      screen : Detail,
+      navigationOptions : ({navigation}) => {
+         const {navigate,getParam} = navigation
+         const title = getParam('title')
+         const handleShare = async () => {
+            try {
+               const result = await Share.share({
+                 message:
+                   'React Native | A framework for building native apps using React',
+               });
+
+               if (result.action === Share.sharedAction) {
+                 if (result.activityType) {
+                   // shared with activity type of result.activityType
+                 } else {
+                   // shared
+                 }
+               } else if (result.action === Share.dismissedAction) {
+                 // dismissed
+               }
+            } catch (error) {
+               alert(error.message);
+            }
+         }
+         return {
+            headerTitle : title,
+            headerTitleStyle: {
+               fontSize: 18,
+               fontWeight : 'bold'
+            },
+            headerRight: <Icon type="FontAwesome" name="share-alt" style={{marginRight:30,fontSize:20}} onPress={handleShare} />,
+         }
+
+      }
+   }
+})
 
 const RootNav = createSwitchNavigator({
    PrivateNavigation: PrivateNavigation,

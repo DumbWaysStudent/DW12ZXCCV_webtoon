@@ -10,7 +10,7 @@ import {
 import FavoriteItem from '../FavoriteItem';
 
 
-function Favorite({items}) {
+function Favorite({items,navigation}) {
    const [favoriteItem,setFavoriteItem] = useState(items);
    return (
       <View>
@@ -19,7 +19,7 @@ function Favorite({items}) {
          >
          <View style={{flex:1,paddingHorizontal:18,paddingTop:18}}>
             <Text style={{fontSize:24,fontWeight:'bold'}}>Favourite</Text>
-            <View style={{height:130,marginTop:20}}>
+            <View style={{height:160,marginTop:20}}>
                <ScrollView
                   horizontal={true}
                   showsHorizontalScrollIndicator={false}
@@ -27,7 +27,7 @@ function Favorite({items}) {
                {
                   favoriteItem.map((item,index) => {
                      return  (
-                           <FavoriteItem key={index} {...item} />
+                           <FavoriteItem  key={index} {...item} navigation={navigation} />
                      )
                   })
                }

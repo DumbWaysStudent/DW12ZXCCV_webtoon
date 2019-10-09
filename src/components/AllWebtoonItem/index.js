@@ -5,6 +5,7 @@ import {
    View,
    TouchableOpacity
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome'
 import { PRIMARY_COLOR } from '../../config/constant';
 
 function AllWebtoonItem({id,title,genre,image}) {
@@ -29,7 +30,9 @@ function AllWebtoonItem({id,title,genre,image}) {
                <Text style={{fontSize:15,color:'#666',fontWeight:'bold'}}>{genre}</Text>
                <TouchableOpacity>
                   <View style={{width:150,height:40,backgroundColor:PRIMARY_COLOR,marginTop:10,borderRadius:3,alignItems:'center',justifyContent:'center'}}>
-                     <Text style={{color:'white',fontWeight:'bold'}}>Favoritkan</Text>
+                     <Text style={{color:'white',fontWeight:'bold'}}>
+                        <Icon type="FontAwesome" name="plus" /> Add To Favorit
+                     </Text>
                   </View>
                </TouchableOpacity>
             </View>
