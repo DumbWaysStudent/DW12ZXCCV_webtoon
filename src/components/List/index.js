@@ -15,11 +15,12 @@ import ButtonFavorite from '../ButtonFavorite';
 
 
 
-function ListWithButton({image,id,title,genre}) {
+function ListWithButton({image,id,title,genre,navigation}) {
    const color = id == "1" ? PRIMARY_COLOR  : 'white';
    const fontColor = id == "1" ? 'white'  : 'black';
       return (
-         <View style={{flex:1,flexDirection:'row',marginTop:10}}>
+         <TouchableOpacity onPress={() => navigation.navigate('Detail',{title,image})}>
+         <View style={{flex:1,flexDirection:'row',marginVertical:5}}>
             <View style={{flex:1}}>
                <View style={{width:20,height:20,backgroundColor:color,justifyContent:'center',alignItems:'center',borderRadius:10}}>
                   <Text style={{color:fontColor,fontWeight:'bold'}}>{id}</Text>
@@ -39,6 +40,7 @@ function ListWithButton({image,id,title,genre}) {
                   </View>
                </View>
          </View>
+         </TouchableOpacity>
       )
 }
 

@@ -5,7 +5,8 @@ import {
    Text,
    Button,
    Image,
-   FlatList
+   FlatList,
+   ScrollView
 } from 'react-native';
 
 import  {
@@ -26,6 +27,7 @@ function Detail({navigation}) {
 
 
    return(
+      <ScrollView>
       <View style={{flex:1}}>
       <View style={{flex:2}}>
          <Image
@@ -39,9 +41,11 @@ function Detail({navigation}) {
            data={dataEpisode}
            renderItem={({ item }) => <Episode key={item.id} {...item} navigation={navigation}  />}
            keyExtractor={item => item.id.toString()}
+           scrollEnabled={false}
          />
       </View>
       </View>
+      </ScrollView>
    )
 }
 

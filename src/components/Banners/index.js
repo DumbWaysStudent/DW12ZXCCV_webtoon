@@ -31,7 +31,7 @@ function Banners({items}){
    },[currentIndex]);
 
    return (
-      <View style={{marginLeft:18,paddingBottom:20}}>
+      <View style={{paddingBottom:20}}>
           <View>
               <Image
                  source={{uri:banners[currentIndex].image}}
@@ -46,7 +46,7 @@ function Banners({items}){
                <Text style={{position : 'absolute', right : 2,top:20,fontWeight:'bold'}}>
                   <Icon name="ios-checkmark-circle" style={{fontSize:15,color:PRIMARY_COLOR}}> {banners[currentIndex].popularity}</Icon>
                </Text>
-              <Text style={{color :'#666',fontWeight:'bold',width:'100%'}}>{banners[currentIndex].desc}</Text>
+              <Text style={{color :'#666',marginTop:10,fontSize:16,width:'100%'}}>{banners[currentIndex].desc}</Text>
           </View>
       </View>
    )

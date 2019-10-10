@@ -4,6 +4,7 @@ import {
    Text,
 } from 'react-native';
 
+
 import List from "../List";
 import {
    BORDER_COLOR
@@ -19,12 +20,11 @@ function AllWebtoon({items,navigation}) {
             {
                items.map((item,index) => {
                   return (
-                     <List withButton key={index} navigation={navigation} {...item} />
+                        <List withButton key={item.id} navigation={navigation} {...item} />
                   )
                })
             }
          </View>
-
       </View>
    )
 }
