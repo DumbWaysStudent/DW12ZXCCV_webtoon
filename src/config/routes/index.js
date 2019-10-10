@@ -10,20 +10,19 @@ import {
    TouchableOpacity,
    Share
 } from 'react-native';
+
 //screens
 import Login from '../../screens/Login';
 import ForYou from '../../screens/ForYou';
 import Favorite from '../../screens/Favorite';
 import Profile from '../../screens/Profile';
+import EditProfile from '../../screens/EditProfile';
 import Detail from '../../screens/Detail';
 import DetailEpisode from '../../screens/DetailEpisode';
 
-import {
-   handleShare
-} from '../../helpers';
-import  {
-   PRIMARY_COLOR
-} from '../../config/constant';
+// import helper and constant
+import { handleShare } from '../../helpers';
+import  { PRIMARY_COLOR } from '../../config/constant';
 
 const PublicNavigation = createStackNavigator({
    Login: {
@@ -40,10 +39,10 @@ const ProfileStack = createStackNavigator({
          navigationOptions : ({navigation}) => {
             return {
                headerTitle : 'Profile',
-               headerRight: <Icon type="FontAwesome" name="pencil" style={{marginRight:30,fontSize:20,color:PRIMARY_COLOR}} onPress={handleShare} />,
+               headerRight: <Icon type="FontAwesome" name="pencil" style={{marginRight:30,fontSize:20,color:PRIMARY_COLOR}} onPress={() => navigation.navigate('EditProfile')} />,
             }
          }
-      }
+      },
 });
 
 const BottomNavigation = createBottomTabNavigator(
@@ -137,12 +136,22 @@ const PrivateNavigation = createStackNavigator({
             headerRight: <Icon type="FontAwesome" name="share-alt" style={{marginRight:30,fontSize:20,color:'whitesmoke'}} onPress={handleShare} />,
          }
       }
-    }
+   },
+   EditProfile : {
+      screen : EditProfile,
+      navigationOptions : ({navigation}) => {
+         return {
+            headerTitle : 'Edit Profile',
+            headerRight: <Icon type="FontAwesome" name="check" style={{marginRight:30,fontSize:20,color:PRIMARY_COLOR}} onPress={ () => navigation.navigate('Profile') }  />,
+         }
+      }
+   }
 })
 
 const RootNav = createSwitchNavigator({
    PrivateNavigation: PrivateNavigation,
    PublicNavigation: PublicNavigation,
 });
+
 
 export default createAppContainer(RootNav);

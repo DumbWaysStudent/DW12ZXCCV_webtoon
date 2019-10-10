@@ -4,3 +4,4 @@ export const SUBTITLE_SIZE = 18;
 export const TITLE_COLOR = 'black';
 export const SUBTITLE_COLOR = '#666';
 export const  BORDER_COLOR = '#dedbdb';
+export const BORDER_WIDTH  = 0.3;

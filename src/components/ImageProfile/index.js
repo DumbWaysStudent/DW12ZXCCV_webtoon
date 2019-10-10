@@ -12,9 +12,7 @@ function ImageProfile() {
             <View style={{flex:1,padding:30}}>
                <Icon type="FontAwesome" name="user-circle-o" style={{fontSize:90,color :PRIMARY_COLOR}}/>
             </View>
-            <View style={{flex:2,padding:30}}>
-               <Text style={{fontSize:20,color:'#666'}}>AHMAD HAIDAR ALBAQIR</Text>
-            </View>
+      
          </View>
    )
 }

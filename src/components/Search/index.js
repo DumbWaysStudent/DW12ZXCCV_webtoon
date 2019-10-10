@@ -20,6 +20,7 @@ import {
                    borderStyle: 'solid',
                    fontSize:15,
                    borderRadius: 25,
+                   backgroundColor:'white'
                }}/>
             <Icon name="search" style={{fontSize:20,marginRight:20,position:'absolute',right:10,top:25,color:PRIMARY_COLOR}} />
       </View>
