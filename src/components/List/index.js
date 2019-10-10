@@ -18,7 +18,6 @@ import ButtonFavorite from '../ButtonFavorite';
 function ListWithButton({image,id,title,genre}) {
    const color = id == "1" ? PRIMARY_COLOR  : 'white';
    const fontColor = id == "1" ? 'white'  : 'black';
-
       return (
          <View style={{flex:1,flexDirection:'row',marginTop:10}}>
             <View style={{flex:1}}>

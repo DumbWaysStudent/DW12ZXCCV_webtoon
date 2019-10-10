@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 function Card({image,title,navigation,genre,popularity}) {
    return  (
       <TouchableOpacity onPress={() => navigation.navigate('Detail',{title,image})}>
-      <View style={{width:130,height:140,paddingBottom:20}}>
+      <View style={{width:125,height:140,paddingBottom:20}}>
          <View style={{flex:2}}>
             <Image
                source={{uri:image}}

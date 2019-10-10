@@ -21,6 +21,9 @@ import DetailEpisode from '../../screens/DetailEpisode';
 import {
    handleShare
 } from '../../helpers';
+import  {
+   PRIMARY_COLOR
+} from '../../config/constant';
 
 const PublicNavigation = createStackNavigator({
    Login: {
@@ -31,6 +34,17 @@ const PublicNavigation = createStackNavigator({
    },
 });
 
+const ProfileStack = createStackNavigator({
+      Profile : {
+         screen : Profile,
+         navigationOptions : ({navigation}) => {
+            return {
+               headerTitle : 'Profile',
+               headerRight: <Icon type="FontAwesome" name="pencil" style={{marginRight:30,fontSize:20,color:PRIMARY_COLOR}} onPress={handleShare} />,
+            }
+         }
+      }
+});
 
 const BottomNavigation = createBottomTabNavigator(
    {
@@ -55,13 +69,13 @@ const BottomNavigation = createBottomTabNavigator(
          },
       },
       Profile: {
-         screen: Profile,
+         screen: ProfileStack,
          navigationOptions: {
-            header: null,
             tabBarLabel: 'Profile',
             tabBarIcon: ({tintColor}) => (
                <Icon name="user" color={tintColor} size={25} />
             ),
+
          },
       },
    },
@@ -93,7 +107,6 @@ const PrivateNavigation = createStackNavigator({
       navigationOptions : ({navigation}) => {
          const {navigate,getParam} = navigation
          const title = getParam('title')
-
          return {
             headerTitle : title,
             headerTitleStyle: {
@@ -110,7 +123,6 @@ const PrivateNavigation = createStackNavigator({
       navigationOptions : ({navigation}) => {
          const {navigate,getParam} = navigation
          const title = getParam('title')
-
          return {
             headerTitle : title,
             headerTitleStyle: {
@@ -124,7 +136,6 @@ const PrivateNavigation = createStackNavigator({
             },
             headerRight: <Icon type="FontAwesome" name="share-alt" style={{marginRight:30,fontSize:20,color:'whitesmoke'}} onPress={handleShare} />,
          }
-
       }
     }
 })

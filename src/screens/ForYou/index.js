@@ -29,7 +29,8 @@ import {
    TITLE_SIZE,
    SUBTITLE_SIZE,
    TITLE_COLOR,
-   SUBTITLE_COLOR
+   SUBTITLE_COLOR,
+   BORDER_COLOR
 } from '../../config/constant';
 
 const dataSource =  [
@@ -62,7 +63,7 @@ function ForYou(props) {
     return (
       <Container>
        <Content>
-        <View style={{flex:1}}>
+        <View style={{flex:1,borderWidth:0.3,borderColor:BORDER_COLOR}}>
             <View style={{flex:8,backgroundColor:'#F8F8F8'}}>
                 <View style={{flex:4}}>
                    <Search />
