@@ -33,6 +33,12 @@ export const dataEpisode = [
    {id:4,title : '[Season 1] Ep.06',popularity : '12.666',date: '11 Oktober 2019',image : 'https://swebtoon-phinf.pstatic.net/20190918_222/15687949197163IWYx_JPEG/1568794919667174519.jpg?type=q90'}
 ];
 
+export const dataImage = [
+   {id:1,title : 'Image 1',image : 'https://swebtoon-phinf.pstatic.net/20191008_258/1570511686428FSeFJ_PNG/thumb_1570511653263174546.png?type=q90'},
+   {id:2,title : 'Image 2',image : 'https://swebtoon-phinf.pstatic.net/20190918_285/1568795186298Pvkj3_JPEG/1568795186270174535.jpg?type=q90'},
+   {id:3,title : 'Imge 3',image : 'https://swebtoon-phinf.pstatic.net/20190918_134/15687950605730w5xh_JPEG/1568795060541174527.jpg?type=q90'},
+   {id:4,title : 'Image 3',image : 'https://swebtoon-phinf.pstatic.net/20190918_222/15687949197163IWYx_JPEG/1568794919667174519.jpg?type=q90'}
+]
 
 export const dataStory = [
       {id : 1,image : 'https://swebtoon-phinf.pstatic.net/20191002_110/15699851203617YErk_JPEG/1569985120329171478.jpg?type=q90'},

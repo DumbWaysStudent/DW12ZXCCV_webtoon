@@ -34,7 +34,7 @@ function CreateWebtoon({navigation}){
          <ScrollView>
          <View style={{flex:1}}>
             <View style={{flex:4,padding:18}}>
-               <Text style={{fontSize:TITLE_SIZE}}>Title</Text>
+               <Text style={{fontSize:TITLE_SIZE,marginBottom:10}}>Title</Text>
                <Item regular>
                   <Input />
                </Item>
@@ -48,7 +48,7 @@ function CreateWebtoon({navigation}){
                      )
                   })
                }
-               <Button success style={{marginTop:10,justifyContent:'center',backgroundColor:PRIMARY_COLOR}}>
+               <Button success style={{marginTop:10,justifyContent:'center',backgroundColor:PRIMARY_COLOR}} onPress={() => navigation.navigate('CreateEpisode')}>
                   <Icon type="FontAwesome" name="plus" style={{color:'white'}} />
                   <Text> ADD EPISODE </Text>
                </Button>
