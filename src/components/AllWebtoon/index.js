@@ -7,7 +7,7 @@ import {
 import List from "../List";
 
 
-function AllWebtoon({items}) {
+function AllWebtoon({items,navigation}) {
    return (
       <View style={{flex:1,paddingHorizontal:18,paddingTop:18}}>
          <Text style={{fontSize:24,fontWeight:'bold'}}>All</Text>
@@ -16,7 +16,7 @@ function AllWebtoon({items}) {
             {
                items.map((item,index) => {
                   return (
-                     <List key={index} {...item} />
+                     <List withButton key={index} navigation={navigation} {...item} />
                   )
                })
             }

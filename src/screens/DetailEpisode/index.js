@@ -13,7 +13,6 @@ const story = [
 ]
 
 function Story({image}) {
-   console.log(image);
    return (
       <Image
          source={{uri:image}}

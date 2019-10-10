@@ -32,7 +32,7 @@ import {
    SUBTITLE_COLOR
 } from '../../config/constant';
 
-const initialBanners =  [
+const dataSource =  [
          {
                id : 1,
                title: 'The Secret of Angel',
@@ -73,15 +73,15 @@ function ForYou(props) {
                 </View>
                 <View style={{flex:9,alignItems:'center'}}>
                    <View style={{marginTop:20}}></View>
-                   <Banners items={initialBanners} />
+                   <Banners items={dataSource} />
                 </View>
             </View>
             <View style={{flex:4}}>
                <Favorite
-                  items={initialBanners}
+                  items={dataSource}
                   navigation={navigation}
                />
-               <AllWebtoon items={initialBanners} />
+               <AllWebtoon items={dataSource} navigation={navigation} />
             </View>
         </View>
         </Content>
