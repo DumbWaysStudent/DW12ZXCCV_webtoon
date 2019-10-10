@@ -16,6 +16,11 @@ import ForYou from '../../screens/ForYou';
 import Favorite from '../../screens/Favorite';
 import Profile from '../../screens/Profile';
 import Detail from '../../screens/Detail';
+import DetailEpisode from '../../screens/DetailEpisode';
+
+import {
+   handleShare
+} from '../../helpers';
 
 const PublicNavigation = createStackNavigator({
    Login: {
@@ -82,31 +87,13 @@ const PrivateNavigation = createStackNavigator({
          header : null
       }
    },
+
    Detail : {
       screen : Detail,
       navigationOptions : ({navigation}) => {
          const {navigate,getParam} = navigation
          const title = getParam('title')
-         const handleShare = async () => {
-            try {
-               const result = await Share.share({
-                 message:
-                   'React Native | A framework for building native apps using React',
-               });
 
-               if (result.action === Share.sharedAction) {
-                 if (result.activityType) {
-                   // shared with activity type of result.activityType
-                 } else {
-                   // shared
-                 }
-               } else if (result.action === Share.dismissedAction) {
-                 // dismissed
-               }
-            } catch (error) {
-               alert(error.message);
-            }
-         }
          return {
             headerTitle : title,
             headerTitleStyle: {
@@ -117,7 +104,29 @@ const PrivateNavigation = createStackNavigator({
          }
 
       }
-   }
+   },
+   DetailEpisode : {
+      screen : DetailEpisode,
+      navigationOptions : ({navigation}) => {
+         const {navigate,getParam} = navigation
+         const title = getParam('title')
+
+         return {
+            headerTitle : title,
+            headerTitleStyle: {
+               fontSize: 18,
+               color : 'white',
+               fontWeight : 'bold'
+            },
+            headerTintColor: '#fff',
+            headerStyle : {
+               backgroundColor : 'black'
+            },
+            headerRight: <Icon type="FontAwesome" name="share-alt" style={{marginRight:30,fontSize:20,color:'whitesmoke'}} onPress={handleShare} />,
+         }
+
+      }
+    }
 })
 
 const RootNav = createSwitchNavigator({

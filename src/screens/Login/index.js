@@ -12,7 +12,7 @@ import {
     Icon
 } from 'native-base';
 
-import { validateEmail } from '../../config/helpers'
+import { validateEmail } from '../../helpers'
 
 
 export default function Login({navigation}) {

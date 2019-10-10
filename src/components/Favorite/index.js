@@ -7,7 +7,7 @@ import {
    FlatList
 } from 'react-native';
 
-import FavoriteItem from '../FavoriteItem';
+import Card from '../Card';
 
 
 function Favorite({items,navigation}) {
@@ -27,7 +27,7 @@ function Favorite({items,navigation}) {
                {
                   favoriteItem.map((item,index) => {
                      return  (
-                           <FavoriteItem  key={index} {...item} navigation={navigation} />
+                           <Card  key={index} {...item} navigation={navigation} />
                      )
                   })
                }

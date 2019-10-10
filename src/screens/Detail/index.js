@@ -43,8 +43,8 @@ function Detail({navigation}) {
       <View style={{flex:5,marginTop:20}}>
          <FlatList
            data={episode}
-           renderItem={({ item }) => <Episode key={item.id} {...item}  />}
-           keyExtractor={item => item.id}
+           renderItem={({ item }) => <Episode key={item.id} {...item} navigation={navigation}  />}
+           keyExtractor={item => item.id.toString()}
          />
       </View>
       </View>

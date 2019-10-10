@@ -8,7 +8,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { PRIMARY_COLOR } from '../../config/constant';
 
-function AllWebtoonItem({id,title,genre,image}) {
+function List({id,title,genre,image}) {
    const color = id == "1" ? PRIMARY_COLOR  : 'white';
    const fontColor = id == "1" ? 'white'  : 'black';
    return (
@@ -42,4 +42,4 @@ function AllWebtoonItem({id,title,genre,image}) {
 }
 
 
-export default AllWebtoonItem;
+export default List;

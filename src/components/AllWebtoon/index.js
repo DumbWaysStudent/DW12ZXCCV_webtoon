@@ -4,7 +4,7 @@ import {
    Text,
 } from 'react-native';
 
-import AllWebtoonItem from "../AllWebtoonItem";
+import List from "../List";
 
 
 function AllWebtoon({items}) {
@@ -16,7 +16,7 @@ function AllWebtoon({items}) {
             {
                items.map((item,index) => {
                   return (
-                     <AllWebtoonItem key={index} {...item} />
+                     <List key={index} {...item} />
                   )
                })
             }

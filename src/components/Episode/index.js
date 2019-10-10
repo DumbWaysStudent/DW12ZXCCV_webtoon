@@ -10,9 +10,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { PRIMARY_COLOR } from '../../config/constant';
 
-function Episode({title,image,name,popularity,episode,date}) {
+function Episode({title,image,name,popularity,episode,date,navigation}) {
    return (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('DetailEpisode',{title})}>
       <View style={{flex:1,height:100,flexDirection:'row',borderWidth:0.5,borderColor:'#f5f5f5'}}>
          <View style={{flex:2}}>
             <Image

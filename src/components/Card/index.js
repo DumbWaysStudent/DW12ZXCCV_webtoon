@@ -11,7 +11,7 @@ import {PRIMARY_COLOR} from '../../config/constant'
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function FavoriteItem({image,title,navigation,genre,popularity}) {
+function Card({image,title,navigation,genre,popularity}) {
    return  (
       <TouchableOpacity onPress={() => navigation.navigate('Detail',{title,image})}>
       <View style={{width:130,height:140,paddingBottom:20}}>
@@ -33,4 +33,4 @@ function FavoriteItem({image,title,navigation,genre,popularity}) {
    )
 }
 
-export default FavoriteItem;
+export default Card;

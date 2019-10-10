@@ -25,6 +25,13 @@ import Banners from '../../components/Banners';
 import Favorite from '../../components/Favorite';
 import Search from '../../components/Search';
 
+import {
+   TITLE_SIZE,
+   SUBTITLE_SIZE,
+   TITLE_COLOR,
+   SUBTITLE_COLOR
+} from '../../config/constant';
+
 const initialBanners =  [
          {
                id : 1,
@@ -60,8 +67,8 @@ function ForYou(props) {
                 <View style={{flex:4}}>
                    <Search />
                     <View style={{flex:1,paddingHorizontal:18}}>
-                        <Text style={{fontSize:24,fontWeight:'700',marginTop:10}}>Halo!</Text>
-                        <Text style={{fontSize:18,color :'#666',marginTop:4}}>Lorem ? ipsum dolor sit atmet adi!</Text>
+                        <Text style={{fontSize:TITLE_SIZE,fontWeight:'700',marginTop:10}}>Halo!</Text>
+                        <Text style={{fontSize:SUBTITLE_SIZE,color :'#666',marginTop:4}}>Lorem ? ipsum dolor sit atmet adi!</Text>
                     </View>
                 </View>
                 <View style={{flex:9,alignItems:'center'}}>
