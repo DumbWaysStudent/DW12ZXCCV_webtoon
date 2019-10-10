@@ -42,9 +42,11 @@ function ListWithButton({image,id,title,genre}) {
       )
 }
 
-function ListWithoutButton({image,id,title,genre,popularity}) {
+function ListWithoutButton({image,id,title,genre,popularity,withSumEpisode,sumEpisode}) {
    const color = id == "1" ? PRIMARY_COLOR  : 'white';
    const fontColor = id == "1" ? 'white'  : 'black';
+   const icon = withSumEpisode ? 'angellist' : 'heart-o';
+   const text = withSumEpisode ? `${sumEpisode} Episode(s)` : popularity;
 
    return (
       <View style={{flex:1,flexDirection:'row',marginTop:10}}>
@@ -58,7 +60,7 @@ function ListWithoutButton({image,id,title,genre,popularity}) {
             <View style={{flex:3}}>
                <Text style={{fontSize:20,fontWeight:'bold'}}>{title  }</Text>
                <Text style={{fontSize:15,color:'#666',fontWeight:'bold'}}>{genre}</Text>
-               <Icon type="FontAwesome" name="heart-o" style={{color:PRIMARY_COLOR,marginTop:20}}> {popularity}</Icon>
+               <Icon type="FontAwesome" name={icon} style={{color:PRIMARY_COLOR,marginTop:20}}> {text}</Icon>
                </View>
             </View>
          </View>
