@@ -45,7 +45,9 @@ function CreateWebtoon({navigation}){
                {
                   dataEpisode.map((item,index) => {
                      return (
-                        <ListEpisode key={index} navigation={navigation} {...item} />
+                        <TouchableOpacity key={index} onPress={() => navigation.navigate('EditEpisode',{'title' : item.title})}>
+                        <ListEpisode  navigation={navigation} {...item} />
+                        </TouchableOpacity>
                      )
                   })
                }

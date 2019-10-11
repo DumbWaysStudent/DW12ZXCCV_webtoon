@@ -25,7 +25,7 @@ function Card({image,title,navigation,genre,popularity}) {
             <Text style={{fontSize:10,color:'silver'}}>{genre}</Text>
             <Text style={{fontSize:13}}>{title}</Text>
             <Text style={{fontSize:12,marginTop: 10,marginLeft:20,color:PRIMARY_COLOR}} >
-               <Icon type="FontAwesome" name="heart" /> {popularity}
+               <Icon type="FontAwesome" name="heart-o" /> {popularity}
             </Text>
          </View>
       </View>

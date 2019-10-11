@@ -15,7 +15,7 @@ function WebtoonCreation({navigation}) {
       <View style={{flex:1}}>
          <FlatList
             data={dataSource}
-            renderItem={({item}) => <TouchableOpacity onPress={() => navigation.navigate('EditWebtoon',{title : item.title})}><List key={item.id} {...item} withSumEpisode /></TouchableOpacity>}
+            renderItem={({item}) => <List key={item.id} {...item} withSumEpisode onPress={() => navigation.navigate('EditWebtoon',{title: item.title})} />}
             keyExtractor={item => item.id.toString()}
          />
          <View style={{width:60,height:60,backgroundColor:PRIMARY_COLOR,borderRadius:30,alignItems:'center',justifyContent:'center',position:'absolute',bottom:20,right:20}}>

@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import {
    Image,
@@ -18,8 +19,8 @@ import ButtonFavorite from '../ButtonFavorite';
 function ListWithButton({image,id,title,genre,navigation}) {
    const color = id == "1" ? PRIMARY_COLOR  : 'white';
    const fontColor = id == "1" ? 'white'  : 'black';
-      return (
-         <TouchableOpacity onPress={() => navigation.navigate('Detail',{title,image})}>
+   return (
+      <TouchableOpacity onPress={() => navigation.navigate('Detail',{title,image})}>
          <View style={{flex:1,flexDirection:'row',marginVertical:5}}>
             <View style={{flex:1}}>
                <View style={{width:20,height:20,backgroundColor:color,justifyContent:'center',alignItems:'center',borderRadius:10}}>
@@ -37,20 +38,21 @@ function ListWithButton({image,id,title,genre,navigation}) {
                   <Text style={{fontSize:20,fontWeight:'bold'}}>{title}</Text>
                   <Text style={{fontSize:15,color:'#666',fontWeight:'bold'}}>{genre}</Text>
                   <ButtonFavorite />
-                  </View>
                </View>
+            </View>
          </View>
-         </TouchableOpacity>
-      )
+      </TouchableOpacity>
+   )
 }
 
-function ListWithoutButton({image,id,title,genre,popularity,withSumEpisode,sumEpisode}) {
+function ListWithoutButton({image,id,title,genre,popularity,withSumEpisode,sumEpisode,onPress}) {
    const color = id == "1" ? PRIMARY_COLOR  : 'white';
    const fontColor = id == "1" ? 'white'  : 'black';
    const icon = withSumEpisode ? 'angellist' : 'heart-o';
    const text = withSumEpisode ? `${sumEpisode} Episode(s)` : popularity;
 
    return (
+      <TouchableOpacity onPress={onPress}>
       <View style={{flex:1,flexDirection:'row',marginTop:10}}>
          <View style={{flex:10,flexDirection : 'row'}}>
             <View style={{flex:2}}>
@@ -63,9 +65,10 @@ function ListWithoutButton({image,id,title,genre,popularity,withSumEpisode,sumEp
                <Text style={{fontSize:20,fontWeight:'bold'}}>{title  }</Text>
                <Text style={{fontSize:15,color:'#666',fontWeight:'bold'}}>{genre}</Text>
                <Icon type="FontAwesome" name={icon} style={{color:PRIMARY_COLOR,marginTop:20}}> {text}</Icon>
-               </View>
             </View>
          </View>
+      </View>
+      </TouchableOpacity>
    )
 }
 
@@ -75,8 +78,8 @@ function List(props) {
    if(props.withButton) {
       return <ListWithButton {...props} />
    }
-      return <ListWithoutButton {...props} />
+   return <ListWithoutButton {...props} />
 }
 
 
-   export default List;
+export default List;
