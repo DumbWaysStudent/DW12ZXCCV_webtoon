@@ -21,6 +21,7 @@ import Detail from '../../screens/Detail';
 import DetailEpisode from '../../screens/DetailEpisode';
 import WebtoonCreation from '../../screens/WebtoonCreation';
 import CreateWebtoon from '../../screens/CreateWebtoon';
+import EditWebtoon from '../../screens/EditWebtoon';
 import CreateEpisode from '../../screens/CreateEpisode';
 // import helper and constant
 import { handleShare } from '../../helpers';
@@ -161,7 +162,7 @@ const PrivateNavigation = createStackNavigator({
       navigationOptions : ({navigation}) => {
          return {
             headerTitle : 'Create Webton',
-            headerRight: <Icon type="FontAwesome" name="check" style={{marginRight:30,fontSize:20,color:PRIMARY_COLOR}} onPress={ () => navigation.navigate('Profile') }  />,
+            headerRight: <Icon type="FontAwesome" name="check" style={{marginRight:30,fontSize:20,color:PRIMARY_COLOR}} onPress={ () => navigation.navigate('WebtoonCreation') }  />,
          }
       }
    },
@@ -170,7 +171,16 @@ const PrivateNavigation = createStackNavigator({
       navigationOptions : ({navigation}) => {
          return {
             headerTitle : 'Create Episode',
-            headerRight: <Icon type="FontAwesome" name="check" style={{marginRight:30,fontSize:20,color:PRIMARY_COLOR}} onPress={ () => navigation.navigate('Profile') }  />,
+            headerRight: <Icon type="FontAwesome" name="check" style={{marginRight:30,fontSize:20,color:PRIMARY_COLOR}} onPress={ () => navigation.goBack(null) }  />,
+         }
+      }
+   },
+   EditWebtoon : {
+      screen : EditWebtoon,
+      navigationOptions : ({navigation}) => {
+         return {
+            headerTitle : 'Edit Webtoon ',
+            headerRight: <Icon type="FontAwesome" name="check" style={{marginRight:30,fontSize:20,color:PRIMARY_COLOR}} onPress={ () => navigation.navigate('WebtoonCreation') }  />,
          }
       }
    }
