@@ -10,6 +10,8 @@ user.post("/login",userController.login)
 user.get("/:id/webtoons",authMiddleware,userController.myWebtton);
 user.get("/:id/webtoon/:webtoon_id/episodes",authMiddleware,userController.episode);
 user.post("/:id/webtoon/:webtoon_id/episode",authMiddleware,userController.createEpisode);
+user.put("/:id/webtoon/:webtoon_id/episode/:episode_id",authMiddleware,userController.editEpisode);
+user.get("/:id/webtoon/:webtoon_id/episode/:episode_id",authMiddleware,userController.episodeWithchapter);
 user.post("/:id/webtoon",authMiddleware,userController.createMyWebtoon);
 user.patch("/:id/webtoon/:webtoon_id",authMiddleware,userController.editMyWebtoon);
 user.delete("/:id/webtoon/:webtoon_id",authMiddleware,userController.deleteMyWebtoon);

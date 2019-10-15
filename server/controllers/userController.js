@@ -5,6 +5,7 @@ const User  = models.user
 const Webtoon = models.webtoon
 const Genre = models.genre
 const Episode = models.episode
+const Chapter = models.chapter
 const saltRounds  = 10
 
 module.exports = {
@@ -140,6 +141,34 @@ module.exports = {
        episode
      })
    })
+ },
+ editEpisode : (req,res) => {
+   Episode.update(
+     req.body,
+     {where : {id : req.params.episode_id}}
+   ).then(episode => {
+     res.json({
+       status : 200,
+       message : "success",
+       data : episode
+     })
+   })
+ },
+ episodeWithchapter : (req,res) => {
+   Episode.findAll({
+     where: {
+       id : req.params.episode_id
+     },
+     include: [{
+         as: "chapter",
+         model: Chapter
+     }]
+   }).then(webtoons=>
+     res.json({
+       status : 200,
+       message : 'success',
+       data : webtoons
+     })
+   )
  }
-
 }
