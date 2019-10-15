@@ -110,5 +110,6 @@ module.exports = {
        data : webtoons
      })
    )
- }
+ },
+ 
 }

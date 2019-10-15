@@ -57,7 +57,7 @@ module.exports = {
 
     });
   },
-  myWebtton : (req,res) => {
+  myWebtoon : (req,res) => {
     let user_id = req.params.id
     Webtoon.findAll({
       where : {
@@ -181,5 +181,8 @@ module.exports = {
      message : 'success',
      data : episode
    }))
+ },
+ addChapter : (req,res) => {
+   Chapter.create(req.body,req.body.episode_id  = req.params.episode_id).then(chapter=> res.json({status:200,message:"success",data:chapter}))
  }
 }
