@@ -2,6 +2,8 @@ const bcyrpt = require('bcrypt')
 const jwt = require("jsonwebtoken")
 const models = require('../models')
 const User  = models.user
+const Webtoon = models.webtoon
+const Genre = models.genre
 const saltRounds  = 10
 
 module.exports = {
@@ -52,6 +54,29 @@ module.exports = {
       }
 
     });
+  },
+  myWebtton : (req,res) => {
+    let user_id = req.params.id
+    Webtoon.findAll({
+      where : {
+          created_by : user_id
+        },
+       include: [{
+           as: "user",
+           model: User
+       },
+       {
+           as: "genre",
+           model: Genre
+       }
+     ]
+   }).then(webtoons =>
+     res.json({
+       status:200,
+       message:'success',
+       data: webtoons
+     })
+   )
   }
 
 }
