@@ -4,24 +4,39 @@ const Genre = models.genre
 const Webtoon = models.webtoon
 const Episode = models.episode
 const Favorite = models.favorite
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op;
 
 module.exports = {
 
   show : (req,res) => {
-   if(req.query && req.query.is_favorite == "true") {
-     Favorite.findAll({
-       where : {
-         user_id : 12
-       },
-       include : ['webtoon','user']
-     }).then(result =>
-       res.json({
-          status: 200,
-          message : 'success',
-          data : result
-       })
-     );
-   }else{
+   if(Object.entries(req.query).length >= 1) {
+       if(req.query.hasOwnProperty('is_favorite')){
+         Favorite.findAll({
+           where : {
+             user_id : 12
+           },
+           include : ['webtoon','user']
+         }).then(result =>
+           res.json({
+              status: 200,
+              message : 'success',
+              data : result
+           })
+         );
+
+       }else{
+         Webtoon.findAll({
+           where  : {
+             title : { [Op.like] : `%${req.query.title}%` }
+           }
+         }).then(result => res.json({
+           status : 200,
+           message : 'succes',
+           data : result
+         }))
+        }
+      }else{
       Webtoon.findAll({
          include: [{
              as: "user",
@@ -36,7 +51,7 @@ module.exports = {
        res.json({
          status:200,
          message:'success',
-         data:webtoons
+         data: webtoons
        })
      )
    }
