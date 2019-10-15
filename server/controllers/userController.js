@@ -4,6 +4,7 @@ const models = require('../models')
 const User  = models.user
 const Webtoon = models.webtoon
 const Genre = models.genre
+const Episode = models.episode
 const saltRounds  = 10
 
 module.exports = {
@@ -77,6 +78,36 @@ module.exports = {
        data: webtoons
      })
    )
-  }
+ },
+
+ createMyWebtoon : (req,res) =>{
+     Webtoon.create(req.body,req.body.created_by = req.params.id).then(webtoon => {
+       res.send({
+         status : 200,
+         message : 'success',
+         data : webtoon
+       })
+     })
+ },
+
+ episode : (req,res) => {
+   let { id,webtoon_id } = req.params
+   Webtoon.findAll({
+     where: {
+       id : webtoon_id,
+       created_by : id
+     },
+     include: [{
+         as: "episodes",
+         model: Episode
+     }]
+   }).then(webtoons=>
+     res.json({
+       status : 200,
+       message : 'success',
+       data : webtoons
+     })
+   )
+ }
 
 }
