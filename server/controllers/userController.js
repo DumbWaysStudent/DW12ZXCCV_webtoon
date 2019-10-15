@@ -16,9 +16,8 @@ module.exports = {
         }).then(user => {
            const token = jwt.sign({ id : user.id }, 'wkwkwkwk')
           res.send({
-            message : 'success',
-            token,
-            user
+            username : user.name,
+            token
           })
         })
       })

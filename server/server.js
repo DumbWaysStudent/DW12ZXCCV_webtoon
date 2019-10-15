@@ -26,7 +26,7 @@ app.group("/api/v1", (router) => {
   // router.get('/webtoons/favorite',webtoonController.favorite)
 
   // api for authentication
-  // router.post("/register",userController.register)
+  router.post("/register",userController.register)
   router.post("/login",userController.login)
 
   // api for episode
