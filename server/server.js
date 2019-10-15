@@ -18,7 +18,7 @@ const  { isAuthenticated } = require("./middleware");
 app.group("/api/v1", (router) => {
 
   // api for webtton
-  // router.get('/webtoons',webtoonController.show)
+  router.get('/webtoons',webtoonController.show)
   // router.get('/webtoons/:id/episodes',webtoonController.episode)
   // router.post('/webtoons',webtoonController.store)
   // router.delete('/webtoons/:id/delete',webtoonController.destroy)
