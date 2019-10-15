@@ -184,5 +184,15 @@ module.exports = {
  },
  addChapter : (req,res) => {
    Chapter.create(req.body,req.body.episode_id  = req.params.episode_id).then(chapter=> res.json({status:200,message:"success",data:chapter}))
+ },
+ deleteChapter : (req,res) => {
+   Chapter.destroy({
+     where : {
+       id : req.params.image_id
+     }
+   }).then(episode => res.json({
+     status : 200,
+     message : "success"
+   }))
  }
 }

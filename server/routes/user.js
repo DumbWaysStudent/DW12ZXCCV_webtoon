@@ -16,6 +16,7 @@ user.delete("/:id/webtoon/:webtoon_id/episode/:episode_id",authMiddleware,userCo
 
 
 user.post("/:id/webtoon/:webtoon_id/episode/:episode_id/image",authMiddleware,userController.addChapter);
+user.delete("/:id/webtoon/:webtoon_id/episode/:episode_id/image/:image_id",authMiddleware,userController.deleteChapter);
 
 
 user.get("/:id/webtoons",authMiddleware,userController.myWebtoon);
