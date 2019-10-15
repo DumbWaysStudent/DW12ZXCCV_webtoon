@@ -108,6 +108,18 @@ module.exports = {
        data : webtoons
      })
    )
+ },
+
+ editMyWebtoon : (req,res) => {
+     Webtoon.update(
+       req.body,
+       {where : {id : req.params.webtoon_id}}
+     ).then(webtoon => {
+       res.json({
+         status : 200,
+         message : "success"
+       })
+     })
  }
 
 }

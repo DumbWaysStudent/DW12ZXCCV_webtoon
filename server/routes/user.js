@@ -11,5 +11,6 @@ user.post("/login",userController.login)
 user.get("/:id/webtoons",authMiddleware,userController.myWebtton);
 user.get("/:id/webtoon/:webtoon_id/episodes",authMiddleware,userController.episode);
 user.post("/:id/webtoon",authMiddleware,userController.createMyWebtoon);
+user.patch("/:id/webtoon/:webtoon_id",authMiddleware,userController.editMyWebtoon);
 
 module.exports = user;
