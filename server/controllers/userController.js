@@ -120,6 +120,18 @@ module.exports = {
          message : "success"
        })
      })
+ },
+ deleteMyWebtoon : (req,res) => {
+   let {webtoon_id} = req.params
+   Webtoon.destroy({
+     where : {
+       id : webtoon_id
+     }
+   }).then(webtoon => res.json({
+     status : 200,
+     message : 'success',
+     data : webtoon
+   }))
  }
 
 }
