@@ -132,6 +132,14 @@ module.exports = {
      message : 'success',
      data : webtoon
    }))
+ },
+ createEpisode : (req,res) => {
+   Episode.create(req.body,req.body.webtoon_id = req.params.webtoon_id).then(episode => {
+     res.send({
+       message : 'success',
+       episode
+     })
+   })
  }
 
 }
