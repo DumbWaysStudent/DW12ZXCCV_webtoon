@@ -170,5 +170,16 @@ module.exports = {
        data : webtoons
      })
    )
+ },
+ deleteEpisode : (req,res) => {
+   Episode.destroy({
+     where : {
+       id : req.params.episode_id
+     }
+   }).then(episode => res.json({
+     status : 200,
+     message : 'success',
+     data : episode
+   }))
  }
 }
