@@ -1,23 +1,15 @@
 
 import React from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
-import{
-  createAppContainer,
-  createSwitchNavigator
-} from 'react-navigation';
+
 import { createStackNavigator } from 'react-navigation-stack';
 import  { createBottomTabNavigator } from 'react-navigation-tabs';
-import {
-  TouchableOpacity,
-  Share
-} from 'react-native';
-
 import ForYou from '../../screens/ForYou';
 import Favorite from '../../screens/Favorite';
 import Profile from '../../screens/Profile';
 import EditProfile from '../../screens/EditProfile';
 
-import  { PRIMARY_COLOR } from '../../config/constant';
+import  { PRIMARY_COLOR,BORDER_COLOR, BORDER_WIDTH } from '../../config/constant';
 
 
 const ForYouStack  = createStackNavigator({
@@ -26,14 +18,23 @@ const ForYouStack  = createStackNavigator({
     navigationOptions : {
       header: null
     }
-  }
+  },
+  
 });
 
 const FavoritStack = createStackNavigator({
   Favorite : {
     screen : Favorite,
-    navigationOptions : {
-      header: null
+    navigationOptions : ({navigation}) => {
+      return {
+        headerTitle : 'My Favorite',
+        headerStyle : {
+          elevation : 0,
+          borderBottomColor : BORDER_COLOR,
+          borderWidth : BORDER_WIDTH
+        },
+        headerRight: <Icon name="search1" style={{marginRight:30,fontSize:25,color:PRIMARY_COLOR}} onPress={() => navigation.navigate('SearchScreen')} />,
+      }
     }
   }
 });
@@ -42,9 +43,15 @@ const FavoritStack = createStackNavigator({
 const ProfileStack = createStackNavigator({
   Profile : {
     screen : Profile,
+  
     navigationOptions : ({navigation}) => {
       return {
         headerTitle : 'Profile',
+        headerStyle : {
+          elevation : 0,
+          borderBottomColor : BORDER_COLOR,
+          borderWidth : BORDER_WIDTH
+        },
         headerRight: <Icon name="edit" style={{marginRight:30,fontSize:20,color:PRIMARY_COLOR}} onPress={() => navigation.navigate('EditProfile')} />,
       }
     }
@@ -54,6 +61,11 @@ const ProfileStack = createStackNavigator({
     navigationOptions : ({navigation}) => {
       return {
         headerTitle : 'Edit Profile',
+        headerStyle : {
+          elevation : 0,
+          borderBottomColor : BORDER_COLOR,
+          borderWidth : BORDER_WIDTH
+        },
         headerRight: <Icon type="FontAwesome" name="check" style={{marginRight:30,fontSize:20,color:PRIMARY_COLOR}} onPress={ () => navigation.navigate('Profile') }  />,
       }
     }
@@ -106,7 +118,8 @@ const BottomNavigation = createBottomTabNavigator(
       },
       style: {
         backgroundColor: '#ffffff',
-        borderTopWidth: 0,
+        elevation : 1,
+        borderColor : BORDER_COLOR
       },
     },
   },

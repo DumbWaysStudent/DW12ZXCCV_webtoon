@@ -1,12 +1,10 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react'
 import {
-   View,
-   Text,
    FlatList,
    Image
 } from 'react-native'
-import {dataStory} from '../../config/data'
-
+import { CONFIG } from '../../config/constant'
+import axios from 'axios'
 
 function Story({image}) {
    return (
@@ -18,10 +16,23 @@ function Story({image}) {
 }
 
 
-function DetailEpisode() {
+function DetailEpisode({navigation}) {
+   const [story,setStory] = useState([])
+   const id = navigation.getParam('id')
+   const webtoonId = navigation.getParam('webtoonId')
+   
+   useEffect(() => {
+      axios.get(`${CONFIG.apiUrl}/webtoons/${webtoonId}/episode/${id}`,{ headers: {"Authorization" : `Bearer ${CONFIG.token._55}`} })
+      .then(res => {
+         let { data : {data} } = res
+         setStory(data)
+      })
+      .catch(err => console.log(err))
+   },[])
+   
    return (
       <FlatList
-        data={dataStory}
+        data={story}
         renderItem={({ item }) => <Story key={item.id} {...item}  />}
         keyExtractor={item => item.id.toString()}
       />

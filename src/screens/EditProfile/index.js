@@ -20,7 +20,6 @@ import ImageProfile from '../../components/ImageProfile';
 import ImagePicker from 'react-native-image-picker'
 // import constant
 import {
-   PRIMARY_COLOR,
    BORDER_COLOR,
    BORDER_WIDTH
 } from '../../config/constant'
@@ -121,5 +120,6 @@ const styles = StyleSheet.create({
     borderRadius: 75,
     width: 150,
     height: 150,
+    marginTop:20
   },
 });

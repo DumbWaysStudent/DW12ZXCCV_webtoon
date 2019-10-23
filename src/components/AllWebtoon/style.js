@@ -9,7 +9,6 @@ import {
    TEXT_PRIMARY
 } from '../../config/constant';
 
-
 const styles = StyleSheet.create({
   container : {
     paddingHorizontal:18,

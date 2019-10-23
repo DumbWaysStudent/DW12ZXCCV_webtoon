@@ -1,21 +1,29 @@
-import React,{useState} from 'react';
-import {
-   View,
-   Text,
-   ScrollView,
-   Image,
-   FlatList
-} from 'react-native';
+import React,{useState,useEffect} from 'react'
+import { View , Text , ScrollView } from 'react-native'
+import Card from '../Card'
+import  { fetchDataFavorite } from '../../config/redux/action'
+import { TEXT_PRIMARY } from '../../config/constant'
+import { api , headerOptions } from '../../config/api'
+import { connect } from 'react-redux'
 
-import Card from '../Card';
+function Favorite(props) {
+   const { token } = props.currUser
+  
+   const handleDeleteFavorite = (id) => {
+    api.delete(`/webtoons/${id}/favorite`, headerOptions(token))
+    .then( response => {
+      props.fetchFavorite(token)
+    })
+    .catch(err => {
+      console.log(err)
+    }) 
+  }
+   
+   useEffect(() => {
+     props.fetchFavorite(token)
+   },[])
+  
 
-import {
-  TEXT_PRIMARY,
-  TEXT_SECONDARY
-}  from '../../config/constant';
-
-function Favorite({items,navigation}) {
-   const [favoriteItem,setFavoriteItem] = useState(items);
    return (
          <View style={{flex:1}}>
             <Text style={{fontSize:TEXT_PRIMARY,fontWeight:'bold',marginLeft:18,marginTop:15}}>Favorit</Text>
@@ -24,17 +32,27 @@ function Favorite({items,navigation}) {
                   horizontal={true}
                   showsHorizontalScrollIndicator={false}
                >
-               {
-                  favoriteItem.map((item,index) => {
-                     return  (
-                           <Card  key={index} {...item} navigation={navigation} />
-                     )
-                  })
-               }
+               {props.favorite.map((item,index) => (
+                 <Card navigation={props.navigation} key={index} {...item} deleteFavorite={handleDeleteFavorite} />
+               ))}
                </ScrollView>
             </View>
          </View>
    )
 }
 
-export default Favorite;
+
+const mapStateToProps = (state) => {
+  return  {
+    currUser : state.auth.currUser,
+    favorite : state.webtoon.favorite
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchFavorite : (token) => dispatch(fetchDataFavorite(token))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Favorite);

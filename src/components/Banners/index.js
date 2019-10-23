@@ -5,12 +5,6 @@ import {
    Image,
 } from 'react-native';
 
-import  {
-    Header,
-    Item,
-    Input,
-    Button,
-} from 'native-base';
 
 import {
   PRIMARY_COLOR,
@@ -23,7 +17,6 @@ import styles from './style.js';
 function Banners({items}){
    const [banners,setBanners] = useState(items);
    const [currentIndex,setCurrentIndex] = useState(0);
-   const [isPlaying,setIsPlaying] = useState(true);
 
    useEffect(
     () => {
@@ -34,7 +27,6 @@ function Banners({items}){
          } , 3000);
          return () => clearTimeout(timeout);
    },[currentIndex]);
-
    return (
       <View style={styles.container}>
           <View>

@@ -1,31 +1,41 @@
-import React from 'react';
+import React,{ useState , useEffect } from 'react';
 import {
    View,
-   Text,
-   ScrollView
+   Text
 } from 'react-native';
-
-
+import  { fetchDataWebtoon } from '../../config/redux/action'
 import List from "../List";
-
 import styles from './style.js';
-
-function AllWebtoon({items,navigation}) {
+import { connect } from 'react-redux'
+function AllWebtoon(props) {
+  const { token } = props.currUser
+   useEffect(() => {
+      props.fetchWebtoon(token)
+   },[props.favorites])
    return (
       <View style={styles.container}>
-         <Text style={styles.title}>Top Scifi</Text>
-
+         <Text style={styles.title}>All</Text>
          <View style={styles.content}>
-            {
-               items.map((item,index) => {
-                  return (
-                        <List withButton key={item.id} navigation={navigation} {...item} />
-                  )
-               })
-            }
+            {props.webtoon.map((item,index) => (
+              <List withButton key={item.id} navigation={props.navigation} {...item} />
+            ))}
          </View>
       </View>
    )
 }
 
-export default AllWebtoon;
+const mapStateToProps = (state) => {
+  return {
+    webtoon : state.webtoon.webtoon,
+    favorites : state.webtoon.favorite,
+    currUser : state.auth.currUser
+  }
+}
+
+const mapDispatchProps = (dispatch) => {
+  return {
+    fetchWebtoon : (token) => dispatch(fetchDataWebtoon(token))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchProps)(AllWebtoon);

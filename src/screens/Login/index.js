@@ -1,7 +1,10 @@
 import React,{useState,useEffect} from 'react'
+import { connect } from 'react-redux'
+import { setCurUser } from '../../config/redux/action'
 import {
     View,
-    StyleSheet
+    StyleSheet,
+    ToastAndroid
 } from 'react-native';
 import {
     Container,
@@ -10,26 +13,45 @@ import {
     Input,
     Button,
     Icon
-} from 'native-base';
+} from 'native-base'
 
 import { validateEmail } from '../../helpers'
 
+import { api } from '../../config/api'
+import { setCurrUser } from '../../config/redux/action'
+import AsyncStorage from '@react-native-community/async-storage';
 
-export default function Login({navigation}) {
+function Login(props) {
+    const [email,setEmail] = useState('')
+    const [password,setPassword] = useState('')
+    const [visible,setVisible] = useState(false)
+    const [active,setActive] = useState(true)
 
-    const [email,setEmail] = useState('');
-    const [password,setPassword] = useState('');
-    const [visible,setVisible] = useState(false);
-    const [active,setActive] = useState(true);
 
     const checkIsError = () => {
         if(validateEmail(email) === true && password.length >= 5) {
             setActive(false);
         }else{
             setActive(true);
-        }
+          }
     }
 
+    const handleSubmit = () => {
+      api.post('/login',{ email , password })
+      .then(res => {
+          let data = {
+              token : res.data.token,
+              user_id : res.data.user_id,
+              username : res.data.username
+          }
+          props.setCurrentUser(data)
+          AsyncStorage.setItem('userData',JSON.stringify(data))
+          props.navigation.navigate('ForYou')
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
 
     useEffect(() => {
         checkIsError();
@@ -39,7 +61,7 @@ export default function Login({navigation}) {
     const color = visible ? 'green' : 'silver';
     const visiblePassword = visible ? false : true;
 
-
+    console.log(props)
     return (
         <Container>
            <View style={styles.loginContainer}>
@@ -75,7 +97,7 @@ export default function Login({navigation}) {
                             full
                             success
                             disabled={active}
-                            onPress={() => navigation.navigate('ForYou')}
+                            onPress={handleSubmit}
                         >
                             <Text>LOGIN</Text>
                         </Button>
@@ -85,6 +107,14 @@ export default function Login({navigation}) {
         </Container>
     )
 }
+
+const mapDispatchProps = (dispatch) => {
+  return {
+    setCurrentUser : (objUser) => dispatch(setCurUser(objUser))
+  }
+}
+
+export default connect(null,mapDispatchProps)(Login)
 
 const styles = StyleSheet.create({
    loginContainer : {

@@ -6,17 +6,15 @@ import {
    Text,
    TouchableOpacity
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {
-  PRIMARY_COLOR,
   BORDER_WIDTH,
   BORDER_COLOR
 } from '../../config/constant';
-
-function Episode({title,image,name,popularity,episode,date,navigation}) {
+import  moment from 'moment'
+function Episode({title,image,createdAt,navigation,id,webtoon_id}) {
    return (
-      <TouchableOpacity onPress={() => navigation.navigate('DetailEpisode',{title})}>
+      <TouchableOpacity onPress={() => navigation.navigate('EditEpisode',{webtoon_id,title,image,id})}>
       <View style={{flex:1,height:80,flexDirection:'row'}}>
          <View style={{flex:1.5}}>
             <Image
@@ -27,8 +25,7 @@ function Episode({title,image,name,popularity,episode,date,navigation}) {
          <View style={{flex:5,padding:15,borderWidth:BORDER_WIDTH,borderColor:BORDER_COLOR}}>
          <Text style={{fontSize:16}}>{title}</Text>
             <View style={{flex:1,flexDirection:'row'}}>
-               <Icon type="FontAwesome" name="heart-o" style={{color:PRIMARY_COLOR,marginTop:15}}> {popularity} </Icon>
-               <Text style={{marginTop:12,marginLeft:20,color:'#666'}}>{date}</Text>
+               <Text style={{marginTop:12,color:'#666'}}>{moment(createdAt).format('DD MMMM YYYY')}</Text>
             </View>
          </View>
       </View>

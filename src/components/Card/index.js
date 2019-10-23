@@ -6,30 +6,25 @@ import {
    Text,
    TouchableOpacity,
 } from 'react-native';
-
 import styles from './styles';
-
 import Icon from 'react-native-vector-icons/AntDesign';
-
-function Card({image,title,navigation,genre,popularity,isFavorite,desc}) {
-  const styleButton = isFavorite ? styles.buttonFavoritActive : styles.buttonFavoritNotActive;
-  const styleText = isFavorite ? styles.buttonFavoritTextActive : styles.buttonFavoritTextNotActive;
-  const icon = isFavorite ? 'check' : 'plus';
+import { basePATH } from '../../config/api/'
+function Card({id,image,title,navigation,genre,desc,deleteFavorite,favorite_id,favorite}) {
    return  (
-      <TouchableOpacity onPress={() => navigation.navigate('Detail',{title,image,genre,desc})}>
+      <TouchableOpacity onPress={() => navigation.navigate('Detail',{id,title,image,genre,desc,favorite})}>
       <View style={styles.containerCard}>
          <View style={{flex:1.5}}>
             <Image
-               source={{uri:image}}
+               source={{uri:`${basePATH}/${image}`}}
                style={styles.imageCard}
             />
          </View>
          <View style={{flex:1.3,padding:10}}>
             <Text style={styles.titleCard}>{title}</Text>
             <Text style={styles.genreCard}>{genre.toUpperCase()}</Text>
-            <TouchableOpacity>
-              <View style={styleButton}>
-                <Text style={styleText}><Icon name={icon} /> Favorit</Text>
+            <TouchableOpacity onPress={ () =>  deleteFavorite(favorite_id)}>
+              <View style={styles.buttonFavoritActive}>
+                <Text style={styles.buttonFavoritTextActive}><Icon name="close" /> Favorit</Text>
               </View>
             </TouchableOpacity>
          </View>
