@@ -6,10 +6,11 @@ const saltRounds  = 10
 
 module.exports = {
   register : (req,res) => {
-    let {email,password} = req.body
+    let {email,password,name} = req.body
     bcyrpt.genSalt(saltRounds, function(err, salt) {
       bcyrpt.hash(password, salt, function(err, hash) {
         User.create({
+          name,
           email,
           password: hash
         }).then(user => {

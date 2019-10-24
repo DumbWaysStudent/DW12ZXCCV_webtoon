@@ -11,14 +11,21 @@ module.exports = {
       title: {
         type: Sequelize.STRING
       },
-      genre_id: {
-        type: Sequelize.INTEGER
+      genre: {
+        type: Sequelize.STRING
       },
       image: {
         type: Sequelize.STRING
       },
-      isFavorite: {
-        type: Sequelize.BOOLEAN
+      created_by: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: "users",
+          key: "id"
+        },
+        onUpdate: "cascade",
+        onDelete: "cascade"
       },
       createdAt: {
         allowNull: false,

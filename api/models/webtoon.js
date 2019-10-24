@@ -2,8 +2,9 @@
 module.exports = (sequelize, DataTypes) => {
   const webtoon = sequelize.define('webtoon', {
     title: DataTypes.STRING,
-    image: DataTypes.STRING,
     genre : DataTypes.STRING,
+    image: DataTypes.STRING,
+    created_by : DataTypes.INTEGER
   }, {});
   webtoon.associate = function(models) {
     webtoon.belongsTo(models.user,{

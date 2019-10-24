@@ -11,6 +11,16 @@ module.exports = {
       title: {
         type: Sequelize.STRING
       },
+      webtoon_id : {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "webtoons",
+          key: "id"
+        },
+        onUpdate: "cascade",
+        onDelete: "cascade"
+      },
       image: {
         type: Sequelize.STRING
       },

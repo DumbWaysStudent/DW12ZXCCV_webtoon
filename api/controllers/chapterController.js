@@ -3,12 +3,12 @@ const Chapter = models.chapter
 
 exports.addChapter = (req,res) => {
 
-    let { page , image } = req.body
+    let { page } = req.body
     let { episode_id } = req.params
     let data = {
         page,
-        image,
-        episode_id
+        episode_id,
+        image : req.file.path
     }
 
     Chapter
