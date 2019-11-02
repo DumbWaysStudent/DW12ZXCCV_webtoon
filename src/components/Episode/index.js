@@ -12,13 +12,15 @@ import {
   BORDER_COLOR
 } from '../../config/constant';
 import  moment from 'moment'
-function Episode({title,image,createdAt,navigation,id,webtoon_id}) {
+import { basePATH } from '../../config/api'
+function Episode({title,image,createdAt}) {
+   let noImage = 'https://image.shutterstock.com/z/stock-vector-no-image-vector-isolated-on-white-background-1481369594.jpg'
+   let imageUrl = image == "" ? noImage : `${basePATH}/${image}`
    return (
-      <TouchableOpacity onPress={() => navigation.navigate('EditEpisode',{webtoon_id,title,image,id})}>
       <View style={{flex:1,height:80,flexDirection:'row'}}>
          <View style={{flex:1.5}}>
             <Image
-               source={{uri:image}}
+               source={{uri:imageUrl}}
                style={{width:'100%',height:'100%'}}
              />
          </View>
@@ -29,7 +31,6 @@ function Episode({title,image,createdAt,navigation,id,webtoon_id}) {
             </View>
          </View>
       </View>
-      </TouchableOpacity>
    )
 }
 

@@ -20,12 +20,13 @@ import {
    BORDER_WIDTH,
    BORDER_COLOR
  } from '../../config/constant';
-
+import { baseURL } from '../../config/api'
 import Icon from 'react-native-vector-icons/AntDesign';
 import ImagePicker from 'react-native-image-picker'
-import { basePATH } from '../../config/api'
+import {api, basePATH , headerOptions} from '../../config/api'
 import { fetchDataMyWebtoon, fetchDataEpisode } from '../../config/redux/action'
 import  Episode  from '../../components/Episode'
+import  Loading  from '../../components/Loading'
 import axios from 'axios'
 
 class EditWebtoon extends React.Component {
@@ -53,6 +54,7 @@ class EditWebtoon extends React.Component {
          webtoon_id : id,
          image : oldImage
       })
+
       this.props.navigation.setParams({'updateWebtoon' : this.handleUpdate})
       this.props.fetchEpisodes(this.props.currUser.token,id)
    }
@@ -113,7 +115,7 @@ class EditWebtoon extends React.Component {
       data.append('image', this.state.dataImage)
       axios({
          method: 'PATCH',
-         url: `http://192.168.1.47:5000/api/v1/user/${user_id}/webtoon/${this.state.webtoon_id}`,
+         url: `${baseURL}/user/${user_id}/webtoon/${this.state.webtoon_id}`,
          data,
          headers: {
             'Authorization' : `Bearer ${token}`,
@@ -121,8 +123,10 @@ class EditWebtoon extends React.Component {
          },  
       })
       .then(result => {
-         this.props.fetchMyWebtoon(token,user_id)
          alert('Webtoon succesfully edited')
+         setTimeout(() => {
+            this.props.fetchMyWebtoon(token,user_id)
+         },3000)
       })
       .catch(error => {
 
@@ -130,25 +134,17 @@ class EditWebtoon extends React.Component {
  }
 
  handleDelete = () => {
-    let { webtoon_id} = this.state
+    let { webtoon_id } = this.state
     let { user_id,token } = this.props.currUser
-      axios({
-     method: 'DELETE',
-     url: `${basePATH}/user/${user_id}/webtoon/${webtoon_id}`,
-     data,
-     headers: {
-        'Authorization' : `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
-     },  
-     })
-     .then(result => {
-        
-        this.props.fetchMyWebtoon(token,user_id)
-        
-     })
-     .catch(error => {
-
-     })
+    api.delete(`/user/${user_id}/webtoon/${webtoon_id}`,headerOptions(token))
+    .then(result => {
+      alert('Webtoon has been deleted !!!')
+      setTimeout(() => {
+         this.props.fetchMyWebtoon(token,user_id)
+         this.props.navigation.pop()
+      },3000)
+    }) 
+    .catch(error => console.log(err)) 
  }
 
   render () {
@@ -187,17 +183,20 @@ class EditWebtoon extends React.Component {
 
                  <View>
                  <Text style={{fontSize:TITLE_SIZE,marginBottom:10,marginTop:10}}>Episode(s)</Text>
+                 { this.props.isLoading && <Loading /> }
                     {this.props.episodes.map((item,index) => (
-                       <Episode key={index} {...item} navigation={this.props.navigation} />
+                     <TouchableOpacity onPress={() => this.props.navigation.navigate('EditEpisode',{webtoon_id : item.webtoon_id,title : item.title,image : item.image, id : item.id})}>
+                       <Episode key={index} {...item} />
+                     </TouchableOpacity>
                     ))}
                  </View>
-                 <View style={{marginTop:20,flexDirection:'row'}}>
+                 <View style={{marginTop:20,flexDirection:'row',justifyContent:'space-between'}}>
                   <View style={{padding:10,backgroundColor:PRIMARY_COLOR,width:'40%',borderRadius:3}}>
                      <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateEpisode',{webtoon_id : this.props.navigation.getParam('id')})}>
                      <Text style={{color:'white'}}> <Icon name="pluscircle" /> Episode</Text>
                      </TouchableOpacity>
                   </View>
-                  <View style={{padding:10,backgroundColor:'yellow',width:'40%',borderRadius:3,marginRight:3}}>
+                  <View style={{padding:10,backgroundColor:'#f7be16',width:'40%',borderRadius:3,marginRight:3}}>
                      <TouchableOpacity onPress={() => this.handleDelete()}>
                         <Text style={{color:'white'}}> <Icon name="closecircle" /> Webtoon </Text>
                      </TouchableOpacity>
@@ -214,14 +213,15 @@ class EditWebtoon extends React.Component {
    const mapStateToProps  = (state) => {
       return {
          currUser : state.auth.currUser,
-         episodes : state.webtoon.episodes
+         episodes : state.webtoon.episodes,
+         isLoading : state.webtoon.isLoading
       }
    }
 
    const mapDispatchToProps = (dispatch) => {
       return {
          fetchMyWebtoon : (token,user_id) => dispatch(fetchDataMyWebtoon(token,user_id)),
-         fetchEpisodes : () => dispatch(fetchDataEpisode(token,webtoon_id))
+         fetchEpisodes : (token,webtoon_id) => dispatch(fetchDataEpisode(token,webtoon_id))
       }
    }
 

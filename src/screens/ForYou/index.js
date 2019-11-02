@@ -10,11 +10,12 @@ import Favorite from '../../components/Favorite'
 import Header from '../../components/Header'
 import { connect } from 'react-redux'
 import { dataSource } from '../../config/data.js'
-
+import Loading from '../../components/Loading'
 
 function ForYou(props) {
     const { navigation } = props
     const {username } = props.currUser
+   
     return (
         <ScrollView>
         <View style={{flex:1}}>

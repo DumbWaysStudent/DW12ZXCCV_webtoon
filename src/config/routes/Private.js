@@ -7,6 +7,7 @@ import WebtoonCreation from '../../screens/WebtoonCreation';
 import CreateWebtoon from '../../screens/CreateWebtoon';
 import EditWebtoon from '../../screens/EditWebtoon';
 import CreateEpisode from '../../screens/CreateEpisode';
+import CreatePage from '../../screens/CreatePage';
 import EditEpisode from '../../screens/EditEpisode';
 import Search from '../../screens/Search';
 // import helper and constant
@@ -87,6 +88,9 @@ const PrivateNavigation = createStackNavigator({
   },
   CreateEpisode : {
     screen : CreateEpisode,
+  },
+  CreatePage : {
+    screen : CreatePage
   },
   EditEpisode : {
     screen : EditEpisode

@@ -3,40 +3,52 @@ import {
    FlatList,
    Image
 } from 'react-native'
-import { CONFIG } from '../../config/constant'
-import axios from 'axios'
-
+import { connect } from 'react-redux'
+import { basePATH } from '../../config/api'
+import { fetchDataChapter } from '../../config/redux/action'
+import Loading from '../../components/Loading'
 function Story({image}) {
+   let imageUri = `${basePATH}/${image}`
    return (
       <Image
-         source={{uri:image}}
+         source={{uri:imageUri}}
          style={{width:'100%',height:500}}
       />
    )
 }
 
 
-function DetailEpisode({navigation}) {
-   const [story,setStory] = useState([])
-   const id = navigation.getParam('id')
-   const webtoonId = navigation.getParam('webtoonId')
-   
+function DetailEpisode(props) {
+   const episode_id = props.navigation.getParam('episode_id')
+   const user_id = props.navigation.getParam('user_id')
+   const token = props.navigation.getParam('token')
+
    useEffect(() => {
-      axios.get(`${CONFIG.apiUrl}/webtoons/${webtoonId}/episode/${id}`,{ headers: {"Authorization" : `Bearer ${CONFIG.token._55}`} })
-      .then(res => {
-         let { data : {data} } = res
-         setStory(data)
-      })
-      .catch(err => console.log(err))
+      props.fetchChapter(user_id,token,episode_id)
    },[])
-   
+   if(props.isLoading) {
+      return <Loading />
+   }
    return (
       <FlatList
-        data={story}
+        data={props.chapters}
         renderItem={({ item }) => <Story key={item.id} {...item}  />}
         keyExtractor={item => item.id.toString()}
       />
    )
 }
 
-export default DetailEpisode;
+const mapStateToProps = state => {
+   return {
+      chapters : state.webtoon.chapters,
+      isLoading : state.webtoon.isLoading
+   }
+}
+
+const mapDispatchToProps = dispatch => {
+   return {
+      fetchChapter : (user_id,token,episode_id) => dispatch(fetchDataChapter(user_id,token,episode_id))
+   }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(DetailEpisode);

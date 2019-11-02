@@ -7,13 +7,14 @@ import {
 import Icon from 'react-native-vector-icons/AntDesign';
 import AsyncStorage from '@react-native-community/async-storage';
 import ImageProfile from '../../components/ImageProfile';
+import {connect} from 'react-redux'
 import { BORDER_COLOR,TITLE_PRIMARY } from '../../config/constant';
 
-function Profile({navigation}) {
+function Profile(props) {
    const handleLogout = async () => {
       await AsyncStorage.removeItem('userData',(err) => {
          if (err) throw err
-         navigation.navigate('Login')
+         props.navigation.navigate('Login')
       })
    }
    return (
@@ -24,7 +25,7 @@ function Profile({navigation}) {
                   <ImageProfile />
                </View>
                <View style={{flex:3,alignItems:'center'}}>
-                  <Text style={{fontSize:16}}>AHMAD HAIDAR ALBAQIR</Text>
+                  <Text style={{fontSize:16}}>{props.username.toUpperCase()}</Text>
                </View>
             </View>
          </View>
@@ -47,5 +48,9 @@ function Profile({navigation}) {
 
 
 
-
-export default Profile;
+const mapStateToProps = state => {
+   return {
+      username : state.auth.currUser.username
+   }
+}
+export default connect(mapStateToProps)(Profile);

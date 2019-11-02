@@ -1,6 +1,7 @@
-import React,{useState,useEffect} from 'react'
-import { View , Text , ScrollView } from 'react-native'
+import React,{useEffect} from 'react'
+import { View , Text , ScrollView} from 'react-native'
 import Card from '../Card'
+import Loading from '../../components/Loading'
 import  { fetchDataFavorite } from '../../config/redux/action'
 import { TEXT_PRIMARY } from '../../config/constant'
 import { api , headerOptions } from '../../config/api'
@@ -22,7 +23,10 @@ function Favorite(props) {
    useEffect(() => {
      props.fetchFavorite(token)
    },[])
-  
+
+   if(props.isLoading){
+    return <Loading />
+  }
 
    return (
          <View style={{flex:1}}>
@@ -45,7 +49,8 @@ function Favorite(props) {
 const mapStateToProps = (state) => {
   return  {
     currUser : state.auth.currUser,
-    favorite : state.webtoon.favorite
+    favorite : state.webtoon.favorite,
+    isLoading : state.webtoon.isLoading
   }
 }
 

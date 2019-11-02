@@ -4,7 +4,8 @@ import {
    View,
    Text,
    Image,
-   ScrollView
+   ScrollView,
+   TouchableOpacity
 } from 'react-native'
 import { api ,headerOptions } from '../../config/api'
 import Episode from '../../components/Episode'
@@ -12,7 +13,7 @@ import { handleShare } from '../../helpers'
 import Icon from 'react-native-vector-icons/AntDesign'
 import {basePATH} from '../../config/api'
 import { fetchDataEpisode, fetchDataFavorite } from '../../config/redux/action'
-
+import  Loading from '../../components/Loading'
 function Detail(props) {
    const {getParam} = props.navigation
    const imageBanner = getParam('image') 
@@ -74,8 +75,10 @@ function Detail(props) {
         </View>
       </View>
       <View style={{flex:3}}>
-        {props.episodes.map((item,index) => (
-          <Episode key={index} {...item} navigation={props.navigation} />
+        {props.episodes.map((item,index) =>  (
+          <TouchableOpacity onPress={() => props.navigation.navigate('DetailEpisode',{ user_id : props.currUser.user_id,token : props.currUser.token, episode_id : item.id })}>
+            <Episode key={index} {...item}/>
+          </TouchableOpacity>
         ))}
       </View>
       </View>

@@ -23,10 +23,8 @@ import {
 import Icon from 'react-native-vector-icons/AntDesign';
 import ImagePicker from 'react-native-image-picker'
 import axios from 'axios'
-import {
-   CONFIG
-} from '../../config/constant'
-
+import { setMyWebtoon } from '../../config/redux/action'
+import { baseURL } from '../../config/api'
 class CreateWebtoon extends React.Component {
    constructor(props){
       super(props)
@@ -99,7 +97,7 @@ handleSave = async () => {
       try {
          const response = await axios({
            method: 'POST',
-           url: `http://192.168.1.47:5000/api/v1/user/${this.props.currUser.user_id}/webtoon`,
+           url: `${baseURL}/user/${this.props.currUser.user_id}/webtoon`,
            data,
            headers: {
              'Authorization' : `Bearer ${this.props.currUser.token}`,
@@ -107,7 +105,8 @@ handleSave = async () => {
            },
          });
          if (response.status == 200) {
-           this.props.navigation.pop();
+            alert('Webtoon has been created !!')
+            
            this.setState({
              title: '',
              genre: '',
@@ -161,11 +160,18 @@ handleSave = async () => {
 
    const mapStateToProps  = (state) => {
       return {
-         currUser : state.auth.currUser
+         currUser : state.auth.currUser,
+         myWebtoon : state.user.webtoon
+      }
+   }
+   
+   const mapDispatchToProps = (dispatch) => {
+      return {
+         reFetchMyWebtoon : (data) =>  dispatch(setMyWebtoon(data))
       }
    }
 
-   export default connect(mapStateToProps,null)(CreateWebtoon);
+   export default connect(mapStateToProps,mapDispatchToProps)(CreateWebtoon);
 
 
    const styles = StyleSheet.create({

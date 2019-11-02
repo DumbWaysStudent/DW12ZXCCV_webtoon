@@ -25,12 +25,13 @@ import ImagePicker from 'react-native-image-picker'
 import axios from 'axios'
 import { baseURL } from '../../config/api'
 
-class CreateEpisode extends React.Component {
+
+class CreatePage extends React.Component {
    constructor(props){
       super(props)
       this.state = {
-         webtoon_id : null,
-         title : '',
+         episode_id : null,
+         page : '',
          dataImage : null,
          image : 'https://image.shutterstock.com/z/stock-vector-no-image-vector-isolated-on-white-background-1481369594.jpg',
          loading : false
@@ -39,22 +40,22 @@ class CreateEpisode extends React.Component {
    }
 
    componentDidMount() {
-      let webtoon_id = this.props.navigation.getParam('webtoon_id')
+      this.props.navigation.setParams({'createPage' : this.handleSave})
+      let episode_id = this.props.navigation.getParam('episode_id')
       this.setState({
-         webtoon_id
+          episode_id
       })
-      this.props.navigation.setParams({'createEpisode' : this.handleSave})
    }
 
-   static navigationOptions = ({ navigation, navigationOptions }) => {
+   static navigationOptions = ({ navigation }) => {
       return {
-         headerTitle : 'Create Episode',
+         headerTitle : 'Create Page',
          headerStyle : {
            elevation : 0,
            borderBottomColor : BORDER_COLOR,
            borderWidth : BORDER_WIDTH
          },
-         headerRight: <Icon name="check" style={{marginRight:30,fontSize:20,color:PRIMARY_COLOR}} onPress={navigation.getParam('createEpisode') }  />,
+         headerRight: <Icon name="check" style={{marginRight:30,fontSize:20,color:PRIMARY_COLOR}} onPress={navigation.getParam('createPage') }  />,
       };
     };
    
@@ -87,7 +88,7 @@ class CreateEpisode extends React.Component {
          }
         this.setState({
            image : response.uri,
-            dataImage
+           dataImage
          })
       }
     })
@@ -95,44 +96,44 @@ class CreateEpisode extends React.Component {
 
 handleSave = async () => {
       let data = new FormData;
-      let { webtoon_id } = this.state
-      let { token,user_id } = this.props.currUser
-      data.append('title',this.state.title)
+      data.append('page',this.state.page)
       data.append('image', this.state.dataImage)
       try {
          const response = await axios({
            method: 'POST',
-           url: `${baseURL}/user/${user_id}/webtoon/${webtoon_id}/episode`,
+           url: `${baseURL}/user/${this.props.currUser.user_id}/webtoon/3/episode/${this.state.episode_id}/image`,
            data,
            headers: {
-             'Authorization' : `Bearer ${token}`,
+             'Authorization' : `Bearer ${this.props.currUser.token}`,
              'Content-Type': 'multipart/form-data',
            },
          });
          if (response.status == 200) {
-         //   this.props.navigation.pop();
-         alert('Episode has been created !!')
+           this.props.navigation.pop();
            this.setState({
-             title: '',
+             page: '',
+             episode_id : null,
              image: 'https://image.shutterstock.com/z/stock-vector-no-image-ve-isolated-on-white-background-1481369594.jpg',
            });
          }
        } catch (error) {
          console.log(error);
        }
- };
+ }
 
   render () {
      return (
            <ScrollView>
            <View style={{flex:1}}>
               <View style={{flex:4,padding:18}}>
+
                  <View>
-                 <Text style={{fontSize:TITLE_SIZE,marginBottom:10,marginTop:10}}>Title</Text>
-                 <Item regular>
-                    <Input  onChangeText={text => this.setState({title : text})} />
-                 </Item>
+                    <Text style={{fontSize:TITLE_SIZE,marginBottom:10,marginTop:10}}>Page</Text>
+                    <Item regular>
+                        <Input keyboardType='numeric'  onChangeText={text => this.setState({page : text})} />
+                    </Item>
                  </View>
+  
 
                  <View>
                  <Text style={{fontSize:TITLE_SIZE,marginBottom:10,marginTop:10}}>Image</Text>
@@ -161,7 +162,7 @@ handleSave = async () => {
       }
    }
 
-   export default connect(mapStateToProps,null)(CreateEpisode);
+   export default connect(mapStateToProps,null)(CreatePage);
 
 
    const styles = StyleSheet.create({

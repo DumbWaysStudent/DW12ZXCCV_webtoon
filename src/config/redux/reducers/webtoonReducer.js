@@ -2,7 +2,8 @@ let initialState = {
   isLoading : false,
   webtoon : [],
   favorite : [],
-  episodes : []
+  episodes : [],
+  chapters : []
 }
 
 export default (state = initialState , action) => {
@@ -28,6 +29,12 @@ export default (state = initialState , action) => {
       return {
         ...state,
         episodes : action.payload
+      }
+    break;
+    case 'SET_CHAPTER' :
+      return {
+        ...state,
+        chapters : action.payload
       }
     break;
     default:

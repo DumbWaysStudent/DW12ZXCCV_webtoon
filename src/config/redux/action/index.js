@@ -93,6 +93,28 @@ export const fetchDataMyWebtoon = (token,user_id) => {
   }
 }
 
+export const setDataChapter = (data) => {
+  return {
+    type : 'SET_CHAPTER',
+    payload : data
+  }
+}
+
+export const fetchDataChapter = (user_id,token,episode_id) => {
+  return (dispatch) => {
+    dispatch({type : 'SET_IS_LOADING_WEBTOON', payload : true})
+    api.get(`/user/${user_id}/webtoon/3/episode/${episode_id}/images`,headerOptions(token))
+      .then(response => {
+        let {data : { data }} = response
+        dispatch(setDataChapter(data))
+        dispatch({type : 'SET_IS_LOADING_WEBTOON', payload : false})
+      })
+      .catch(err => {
+        dispatch({type : 'SET_IS_LOADING_WEBTOON', payload : false})
+    })
+  }
+}
+
 export const setCurUser = (objUser) => {
   return {
     type : 'SET_CURR_USER',

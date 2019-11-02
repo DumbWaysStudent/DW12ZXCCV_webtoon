@@ -4,13 +4,12 @@ import {
    Image,
    Text,
 } from 'react-native';
-
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { PRIMARY_COLOR } from '../../config/constant';
 
 
 
-function ListEpisode({image,title,date,navigation}) {
+function ListEpisode({image,title,date}) {
    return (
       <View style={{flex:1,marginTop:20}}>
          <View style={{flex:10,flexDirection : 'row'}}>

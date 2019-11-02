@@ -1,10 +1,11 @@
-import React , {useState,useEffect} from 'react'
+import React from 'react'
 import {
    View,
    Text,
    TouchableOpacity,
    FlatList,
-   Image
+   Image,
+   ActivityIndicator
 } from 'react-native'
 import Icon from 'react-native-vector-icons/AntDesign'
 import {
@@ -35,7 +36,6 @@ function ListMyFavorite({image,title,isFavorite,navigation}) {
 }
 
 function Favorite(props) {
-
    return (
       <View style={{flex:1}}>
          <View style={{flex:7}}>
@@ -51,7 +51,8 @@ function Favorite(props) {
 
 const mapStateToProps = (state) => {
    return {
-      favorites  : state.webtoon.favorite
+      favorites  : state.webtoon.favorite,
+      isLoading : state.webtoon.isLoading
    }
 }
 
